@@ -1,0 +1,227 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<record xmlns="info:srw/schema/5/picaXML-v1.0">
+  <datafield tag="001A">
+    <subfield code="0">0023:26-06-00</subfield>
+  </datafield>
+  <datafield tag="001B">
+    <subfield code="0">2012:26-06-13</subfield>
+    <subfield code="t">00:10:45.000</subfield>
+  </datafield>
+  <datafield tag="001D">
+    <subfield code="0">0023:26-06-00</subfield>
+  </datafield>
+  <datafield tag="001F">
+    <subfield code="0">0</subfield>
+  </datafield>
+  <datafield tag="001U">
+    <subfield code="0">utf8</subfield>
+  </datafield>
+  <datafield tag="002@">
+    <subfield code="0">Oau</subfield>
+  </datafield>
+  <datafield tag="003@">
+    <subfield code="0">314851828</subfield>
+  </datafield>
+  <datafield tag="007G">
+    <subfield code="c">GBV</subfield>
+    <subfield code="0">314851828</subfield>
+  </datafield>
+  <datafield tag="007P">
+    <subfield code="0">n;n, n,n: m,n, DaVn C 1653A</subfield>
+  </datafield>
+  <datafield tag="007S">
+    <subfield code="0">VD17 23:000008Z</subfield>
+  </datafield>
+  <datafield tag="007S">
+    <subfield code="0">Dünnhaupt (2. Aufl.), S. 990, 31</subfield>
+  </datafield>
+  <datafield tag="008@">
+    <subfield code="b">ee</subfield>
+  </datafield>
+  <datafield tag="009A">
+    <subfield code="b">de</subfield>
+    <subfield code="c">HAB Wolfenbüttel</subfield>
+    <subfield code="a">Xb 4° 213</subfield>
+  </datafield>
+  <datafield tag="009P" occurrence="03">
+    <subfield code="S">1</subfield>
+    <subfield code="0">html</subfield>
+    <subfield code="a">http://diglib.hab.de/drucke/xb-4f-213/start.htm</subfield>
+  </datafield>
+  <datafield tag="010@">
+    <subfield code="a">ger</subfield>
+  </datafield>
+  <datafield tag="011@">
+    <subfield code="a">1653</subfield>
+  </datafield>
+  <datafield tag="011B">
+    <subfield code="a">2000</subfield>
+  </datafield>
+  <datafield tag="013@">
+    <subfield code="0">q6</subfield>
+  </datafield>
+  <datafield tag="013@" occurrence="01">
+    <subfield code="0">ge</subfield>
+  </datafield>
+  <datafield tag="019@">
+    <subfield code="a">XA-DE</subfield>
+  </datafield>
+  <datafield tag="021A">
+    <subfield code="a">@Nostitzisches Freudenfest über Der Römischen Königlichen Wahl und Krönung Ferdinand Des Vierden/ Des Heiligen Römischen Reiches .̤ Königes .̤</subfield>
+    <subfield code="d">von Otto Freyherren von Nostitz/ Ihr Röm. Kayserl ̤auch Röm. Königl. Majest. Rath und Kämmerern .̤ Im Jahr 1653 mit eifriger Feyerung vollzogen und gehalten</subfield>
+    <subfield code="h">[Dan. Czepko]</subfield>
+  </datafield>
+  <datafield tag="025@">
+    <subfield code="b">vierten Rat Feierung</subfield>
+  </datafield>
+  <datafield tag="028A">
+    <subfield code="d">Daniel</subfield>
+    <subfield code="c">von</subfield>
+    <subfield code="a">Czepko</subfield>
+    <subfield code="9">136478441</subfield>
+    <subfield code="d">Daniel</subfield>
+    <subfield code="c">von</subfield>
+    <subfield code="a">Czepko</subfield>
+    <subfield code="E">1605</subfield>
+    <subfield code="F">1660</subfield>
+    <subfield code="0">gnd/118677640</subfield>
+  </datafield>
+  <datafield tag="028G">
+    <subfield code="P">Ferdinand</subfield>
+    <subfield code="l">Römisch-Deutsches Reich, König, IV.</subfield>
+    <subfield code="9">139653384</subfield>
+    <subfield code="P">Ferdinand</subfield>
+    <subfield code="n">IV.</subfield>
+    <subfield code="l">Heiliges Römisches Reich, König</subfield>
+    <subfield code="E">1633</subfield>
+    <subfield code="F">1654</subfield>
+    <subfield code="0">gnd/118880349</subfield>
+  </datafield>
+  <datafield tag="032C">
+    <subfield code="a">[Electronic ed.]</subfield>
+  </datafield>
+  <datafield tag="033A">
+    <subfield code="p">Schweidnitz</subfield>
+    <subfield code="n">Wltawsky</subfield>
+  </datafield>
+  <datafield tag="033B" occurrence="01">
+    <subfield code="p">Wolfenbüttel</subfield>
+    <subfield code="n">Herzog August Bibliothek</subfield>
+  </datafield>
+  <datafield tag="033J">
+    <subfield code="9">731455924</subfield>
+    <subfield code="M">Tbv6</subfield>
+    <subfield code="a">Johann Perfert Erben</subfield>
+    <subfield code="0">gnd/6146094-1</subfield>
+  </datafield>
+  <datafield tag="033P">
+    <subfield code="p">Wolfenbüttel</subfield>
+    <subfield code="n">Herzog August Bibliothek</subfield>
+  </datafield>
+  <datafield tag="034D">
+    <subfield code="a">16 S</subfield>
+  </datafield>
+  <datafield tag="036L" occurrence="01">
+    <subfield code="a">dünnhaupt digital</subfield>
+  </datafield>
+  <datafield tag="037H">
+    <subfield code="a">Digitalisierungsvorlage: Original</subfield>
+  </datafield>
+  <datafield tag="037I">
+    <subfield code="a">Herzog August Bibliothek Wolfenbüttel</subfield>
+  </datafield>
+  <datafield tag="044K">
+    <subfield code="9">10577071X</subfield>
+    <subfield code="M">Tsv1</subfield>
+    <subfield code="a">Fest</subfield>
+    <subfield code="0">gnd/4121260-5</subfield>
+  </datafield>
+  <datafield tag="044K">
+    <subfield code="a">Quelle</subfield>
+  </datafield>
+  <datafield tag="044S">
+    <subfield code="9">096631406</subfield>
+    <subfield code="a">Festbeschreibung</subfield>
+  </datafield>
+  <datafield tag="044S">
+    <subfield code="9">096631678</subfield>
+    <subfield code="a">Gelegenheitsschrift:Krönung</subfield>
+  </datafield>
+  <datafield tag="045R" occurrence="01">
+    <subfield code="a">Geschichte</subfield>
+    <subfield code="c">1653</subfield>
+  </datafield>
+  <datafield tag="046F">
+    <subfield code="a">Verf. auf verso des Tbl. genannt</subfield>
+  </datafield>
+  <datafield tag="046H">
+    <subfield code="a">Vorlageform d. Erscheinungsvermerks im Kolophon: Gedruckt zur Schweidnitz/ In der Perfertischen Druckerey Durch Samuelem Rosypalium Wltawsky</subfield>
+  </datafield>
+  <datafield tag="047I">
+    <subfield code="a">Deutsche Drucke zur Festkultur des Barock (1601-1700)</subfield>
+  </datafield>
+  <datafield tag="101@">
+    <subfield code="a">50</subfield>
+  </datafield>
+  <datafield tag="101B">
+    <subfield code="0">26-06-00</subfield>
+    <subfield code="t">09:48:47.538</subfield>
+  </datafield>
+  <datafield tag="101C">
+    <subfield code="0">26-06-00</subfield>
+  </datafield>
+  <datafield tag="101D">
+    <subfield code="0">26-06-00</subfield>
+    <subfield code="b">2000</subfield>
+    <subfield code="a">0000</subfield>
+  </datafield>
+  <datafield tag="101U">
+    <subfield code="0">utf8</subfield>
+  </datafield>
+  <datafield tag="145Z">
+    <subfield code="a">33</subfield>
+  </datafield>
+  <datafield tag="201@" occurrence="01">
+    <subfield code="a">Verfuegbar|Standort unbekannt, wenden Sie sich an die Information</subfield>
+    <subfield code="b">0</subfield>
+    <subfield code="e">393910520</subfield>
+    <subfield code="m">mon</subfield>
+    <subfield code="f">2</subfield>
+    <subfield code="u">Verfuegbar</subfield>
+    <subfield code="v">Standort unbekannt, wenden Sie sich an die Information</subfield>
+  </datafield>
+  <datafield tag="201B" occurrence="01">
+    <subfield code="0">05-02-04</subfield>
+    <subfield code="t">12:25:25.000</subfield>
+  </datafield>
+  <datafield tag="201C" occurrence="01">
+    <subfield code="0">26-06-00</subfield>
+  </datafield>
+  <datafield tag="201D" occurrence="01">
+    <subfield code="0">05-02-04</subfield>
+    <subfield code="b">2102</subfield>
+    <subfield code="a">0023</subfield>
+  </datafield>
+  <datafield tag="201F" occurrence="01">
+    <subfield code="0">0</subfield>
+  </datafield>
+  <datafield tag="201U" occurrence="01">
+    <subfield code="0">utf8</subfield>
+  </datafield>
+  <datafield tag="203@" occurrence="01">
+    <subfield code="0">393910520</subfield>
+  </datafield>
+  <datafield tag="208@" occurrence="01">
+    <subfield code="a">26-06-00</subfield>
+    <subfield code="b">k</subfield>
+  </datafield>
+  <datafield tag="209A" occurrence="01">
+    <subfield code="a">Xb 4° 213</subfield>
+    <subfield code="x">03</subfield>
+  </datafield>
+  <datafield tag="209R" occurrence="01">
+    <subfield code="S">1</subfield>
+    <subfield code="0">html</subfield>
+    <subfield code="a">http://diglib.hab.de/drucke/xb-4f-213/start.htm</subfield>
+  </datafield>
+</record>

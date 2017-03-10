@@ -1,0 +1,274 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<record xmlns="info:srw/schema/5/picaXML-v1.0">
+  <datafield tag="001A">
+    <subfield code="0">0023:26-09-16</subfield>
+  </datafield>
+  <datafield tag="001B">
+    <subfield code="0">0023:07-11-16</subfield>
+    <subfield code="t">16:41:44.000</subfield>
+  </datafield>
+  <datafield tag="001D">
+    <subfield code="0">0023:26-09-16</subfield>
+  </datafield>
+  <datafield tag="001F">
+    <subfield code="0">0</subfield>
+  </datafield>
+  <datafield tag="001U">
+    <subfield code="0">utf8</subfield>
+  </datafield>
+  <datafield tag="002@">
+    <subfield code="0">Oau</subfield>
+  </datafield>
+  <datafield tag="003@">
+    <subfield code="0">868833037</subfield>
+  </datafield>
+  <datafield tag="004U">
+    <subfield code="0">urn:nbn:de:gbv:23-drucke/th-28216</subfield>
+  </datafield>
+  <datafield tag="007G">
+    <subfield code="c">GBV</subfield>
+    <subfield code="0">868833037</subfield>
+  </datafield>
+  <datafield tag="007P">
+    <subfield code="0">s.en s!um enen Geer 3 1662A</subfield>
+  </datafield>
+  <datafield tag="007S">
+    <subfield code="0">VD17 23:324311T</subfield>
+  </datafield>
+  <datafield tag="008@">
+    <subfield code="b">ee zvdd</subfield>
+  </datafield>
+  <datafield tag="009A">
+    <subfield code="b">XA-DE</subfield>
+    <subfield code="c">HAB Wolfenbüttell</subfield>
+    <subfield code="a">M: Th 2821</subfield>
+  </datafield>
+  <datafield tag="009P" occurrence="03">
+    <subfield code="S">1</subfield>
+    <subfield code="a">http://diglib.hab.de/drucke/th-2821/start.htm</subfield>
+    <subfield code="4">LF</subfield>
+  </datafield>
+  <datafield tag="009P" occurrence="03">
+    <subfield code="S">1</subfield>
+    <subfield code="a">http://nbn-resolving.de/urn:nbn:de:gbv:23-drucke/th-28216</subfield>
+  </datafield>
+  <datafield tag="010@">
+    <subfield code="a">ger</subfield>
+  </datafield>
+  <datafield tag="011@">
+    <subfield code="a">1662</subfield>
+  </datafield>
+  <datafield tag="011B">
+    <subfield code="a">2015</subfield>
+  </datafield>
+  <datafield tag="013@">
+    <subfield code="0">o3</subfield>
+  </datafield>
+  <datafield tag="016D">
+    <subfield code="0">cr</subfield>
+  </datafield>
+  <datafield tag="016H">
+    <subfield code="0">Elektronische Ressource</subfield>
+  </datafield>
+  <datafield tag="019@">
+    <subfield code="a">XA-DE</subfield>
+  </datafield>
+  <datafield tag="021A">
+    <subfield code="a">Evangelische Sinn-Bilder/ Auf alle Sonn- hohe Fest- und Apostel-Täg/ vollkom[m]enlich durch das gantze Jahr</subfield>
+    <subfield code="d">in beygefügter Hauptlehr/ und dem dazu gehörigen nützlichen Gebrauch zur Vermahnung/ Warnung/ Erinnerung und Trost ; Mit annehmlichen Erfindungen/ nützlichen Historien/ der H. Schrifft und Kirchen-Väter Sprüchen und Gleichnussen</subfield>
+    <subfield code="h">... geprediget/ Von Philipp Ehrenreich Wider/ Evangelischen Predigern in Regenspurg</subfield>
+  </datafield>
+  <datafield tag="028A">
+    <subfield code="d">Philipp Ehrenreich</subfield>
+    <subfield code="a">Wider</subfield>
+    <subfield code="9">082151784</subfield>
+    <subfield code="d">Philipp Ehrenreich</subfield>
+    <subfield code="a">Wider</subfield>
+    <subfield code="E">1623</subfield>
+    <subfield code="F">1684</subfield>
+    <subfield code="0">gnd/122781058</subfield>
+  </datafield>
+  <datafield tag="028L">
+    <subfield code="P">Antonia</subfield>
+    <subfield code="l">Hertzogin zu Württemberg und Teck</subfield>
+    <subfield code="B">Widmungsempfänger</subfield>
+  </datafield>
+  <datafield tag="028L">
+    <subfield code="P">Maria Dorothea Sophia</subfield>
+    <subfield code="l">Hertzogin zu Württemberg und Teck</subfield>
+    <subfield code="B">Widmungsempfänger</subfield>
+  </datafield>
+  <datafield tag="028L" occurrence="02">
+    <subfield code="d">Matthaeus</subfield>
+    <subfield code="a">Schmoll</subfield>
+    <subfield code="B">Beiträger</subfield>
+  </datafield>
+  <datafield tag="028L" occurrence="02">
+    <subfield code="d">Erasmus</subfield>
+    <subfield code="a">Gruberus</subfield>
+    <subfield code="B">Beiträger</subfield>
+  </datafield>
+  <datafield tag="028L" occurrence="02">
+    <subfield code="d">Joannes Albertus</subfield>
+    <subfield code="a">Portnerus</subfield>
+    <subfield code="B">Beiträger</subfield>
+  </datafield>
+  <datafield tag="028L" occurrence="02">
+    <subfield code="d">Joh. Henricus</subfield>
+    <subfield code="a">Ursinus</subfield>
+    <subfield code="B">Beiträger</subfield>
+  </datafield>
+  <datafield tag="028L" occurrence="02">
+    <subfield code="d">Joh. Christoph</subfield>
+    <subfield code="a">Wider</subfield>
+    <subfield code="B">Beiträger</subfield>
+  </datafield>
+  <datafield tag="028L" occurrence="02">
+    <subfield code="d">Johann Michael</subfield>
+    <subfield code="a">Dilherr</subfield>
+    <subfield code="B">Beiträger</subfield>
+  </datafield>
+  <datafield tag="028L" occurrence="02">
+    <subfield code="d">Hieronymus</subfield>
+    <subfield code="a">Radius</subfield>
+    <subfield code="B">Beiträger</subfield>
+  </datafield>
+  <datafield tag="028L" occurrence="02">
+    <subfield code="d">Benedictus</subfield>
+    <subfield code="a">Hafner</subfield>
+    <subfield code="B">Beiträger</subfield>
+  </datafield>
+  <datafield tag="032C">
+    <subfield code="a">[Online-Ausg.]</subfield>
+  </datafield>
+  <datafield tag="033A">
+    <subfield code="p">Nürnberg</subfield>
+    <subfield code="n">Tauber</subfield>
+  </datafield>
+  <datafield tag="033A">
+    <subfield code="p">Nürnberg</subfield>
+    <subfield code="n">Gerhard</subfield>
+  </datafield>
+  <datafield tag="033B" occurrence="01">
+    <subfield code="p">Wolfenbüttel</subfield>
+    <subfield code="n">Herzog August Bibliothek</subfield>
+  </datafield>
+  <datafield tag="033B" occurrence="03">
+    <subfield code="p">Nürnberg</subfield>
+  </datafield>
+  <datafield tag="033J">
+    <subfield code="9">366749943</subfield>
+    <subfield code="M">Tpv3</subfield>
+    <subfield code="d">Johann</subfield>
+    <subfield code="a">Tauber</subfield>
+    <subfield code="0">gnd/124820824</subfield>
+  </datafield>
+  <datafield tag="033J">
+    <subfield code="9">691288755</subfield>
+    <subfield code="M">Tpv1</subfield>
+    <subfield code="d">Christoph</subfield>
+    <subfield code="a">Gerhard</subfield>
+    <subfield code="0">gnd/133254925</subfield>
+  </datafield>
+  <datafield tag="033P">
+    <subfield code="p">Wolfenbüttel</subfield>
+    <subfield code="n">Herzog August Bibliothek</subfield>
+  </datafield>
+  <datafield tag="033Q">
+    <subfield code="a">Online-Ressource</subfield>
+  </datafield>
+  <datafield tag="034D">
+    <subfield code="a">[10] Bl., 782, 267 S. [13] Bl.</subfield>
+  </datafield>
+  <datafield tag="034I">
+    <subfield code="a">4°</subfield>
+  </datafield>
+  <datafield tag="034M">
+    <subfield code="a">Frontisp. (Portr.), Kupfert., Tbl. r&amp;s., Ill. (Kupferst.)</subfield>
+  </datafield>
+  <datafield tag="036L">
+    <subfield code="a">VD17 Unika und Liste</subfield>
+  </datafield>
+  <datafield tag="037H">
+    <subfield code="a">Digitalisierungsvorlage: Original</subfield>
+  </datafield>
+  <datafield tag="037I">
+    <subfield code="a">Herzog August Bibliothek Wolfenbüttel</subfield>
+  </datafield>
+  <datafield tag="039D">
+    <subfield code="c">Erscheint auch als</subfield>
+    <subfield code="n">Druck-Ausgabe</subfield>
+    <subfield code="l">Wider, Philipp Ehrenreich, 1623-1684</subfield>
+    <subfield code="t">Evangelische Sinn-Bilder/ Auf alle Sonn- hohe Fest- und Apostel-Täg/ vollkom[m]enlich durch das gantze Jahr</subfield>
+    <subfield code="d">Nürnberg</subfield>
+    <subfield code="e">Gerhard</subfield>
+    <subfield code="f">1662</subfield>
+    <subfield code="h">[10] Blatt, 782, 267 Seiten [13] Blatt : Frontisp. (Portr.), Kupfert., Tbl. r&amp;s., Illustrationen (Kupferst.) ; 4°</subfield>
+    <subfield code="C">GBV</subfield>
+    <subfield code="6">535832575</subfield>
+  </datafield>
+  <datafield tag="044S">
+    <subfield code="9">096632798</subfield>
+    <subfield code="a">Predigtsammlung</subfield>
+  </datafield>
+  <datafield tag="044S">
+    <subfield code="9">096631252</subfield>
+    <subfield code="a">Emblembuch</subfield>
+  </datafield>
+  <datafield tag="047C">
+    <subfield code="a">Sonntage Festtage Aposteltage Hauptlehre Schrift Gleichnisen</subfield>
+  </datafield>
+  <datafield tag="101@">
+    <subfield code="a">50</subfield>
+  </datafield>
+  <datafield tag="201@" occurrence="01">
+    <subfield code="a">Verfuegbar|Standort unbekannt, wenden Sie sich an die Information</subfield>
+    <subfield code="b">0</subfield>
+    <subfield code="e">1637870744</subfield>
+    <subfield code="m">mon</subfield>
+    <subfield code="f">2</subfield>
+    <subfield code="u">Verfuegbar</subfield>
+    <subfield code="v">Standort unbekannt, wenden Sie sich an die Information</subfield>
+  </datafield>
+  <datafield tag="201B" occurrence="01">
+    <subfield code="0">26-09-16</subfield>
+    <subfield code="t">11:37:54.000</subfield>
+  </datafield>
+  <datafield tag="201D" occurrence="01">
+    <subfield code="0">26-09-16</subfield>
+    <subfield code="b">2047</subfield>
+    <subfield code="a">0023</subfield>
+  </datafield>
+  <datafield tag="201F" occurrence="01">
+    <subfield code="0">0</subfield>
+  </datafield>
+  <datafield tag="201U" occurrence="01">
+    <subfield code="0">utf8</subfield>
+  </datafield>
+  <datafield tag="203@" occurrence="01">
+    <subfield code="0">1637870744</subfield>
+  </datafield>
+  <datafield tag="208@" occurrence="01">
+    <subfield code="a">26-09-16</subfield>
+    <subfield code="b">k</subfield>
+  </datafield>
+  <datafield tag="209A" occurrence="01">
+    <subfield code="a">M: Th 2821</subfield>
+    <subfield code="x">03</subfield>
+  </datafield>
+  <datafield tag="209R" occurrence="01">
+    <subfield code="S">1</subfield>
+    <subfield code="a">http://diglib.hab.de/drucke/th-2821/start.htm</subfield>
+    <subfield code="4">LF</subfield>
+  </datafield>
+  <datafield tag="209R" occurrence="01">
+    <subfield code="S">1</subfield>
+    <subfield code="a">http://nbn-resolving.de/urn:nbn:de:gbv:23-drucke/th-28216</subfield>
+  </datafield>
+  <datafield tag="237A" occurrence="01">
+    <subfield code="a">Reproduziertes Original: Ex. unvollst., 13 Bl. Register fehlen</subfield>
+  </datafield>
+  <datafield tag="237A" occurrence="01">
+    <subfield code="a">Reproduziertes Original: Exlibris: Ex Libris Coenobii Salisvallensis Zur Ehre Gottes In Bibliothecam Augustam Relatis Anno MDCCCLVII</subfield>
+  </datafield>
+</record>
