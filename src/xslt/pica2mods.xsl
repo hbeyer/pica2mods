@@ -316,8 +316,9 @@
 
   <!-- Fachgruppen der Sammlung Deutscher Drucke -->
   <xsl:template match="datafield[@tag = '145Z']/subfield[@code = 'a'][matches(., '^\d\d$')]">
-    <mods:classification authorityURI="http://uri.hab.de/vocab/sdd-fachgruppen" displayLabel="SDD Fachgruppen">
-      <xsl:variable name="concept" select="skos:resolve-concept(concat('http://uri.hab.de/vocab/sdd-fachgruppen#fg', .))"/>
+    <xsl:variable name="valueURI" select="concat('http://uri.hab.de/vocab/sdd-fachgruppen#fg', .)"/>
+    <xsl:variable name="concept" select="skos:resolve-concept($valueURI)"/>
+    <mods:classification authorityURI="http://uri.hab.de/vocab/sdd-fachgruppen" valueURI="{$valueURI}" displayLabel="SDD Fachgruppen">
       <xsl:value-of select="skos:resolve-label($concept, 'de')"/>
     </mods:classification>
   </xsl:template>
