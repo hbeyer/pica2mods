@@ -4,6 +4,8 @@
                xpath-default-namespace="info:srw/schema/5/picaXML-v1.0"
                xmlns:mods="http://www.loc.gov/mods/v3"
                xmlns:pica="info:srw/schema/5/picaXML-v1.0"
+               xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
+               xmlns:skos="http://www.w3.org/2004/02/skos/core#"
                xmlns:xsd="http://www.w3.org/2001/XMLSchema"
                xmlns:xsl="http://www.w3.org/1999/XSL/Transform">
 
@@ -312,6 +314,14 @@
     </mods:genre>
   </xsl:template>
 
+  <!-- Fachgruppen der Sammlung Deutscher Drucke -->
+  <xsl:template match="datafield[@tag = '145Z']/subfield[@code = 'a'][matches(., '^\d\d$')]">
+    <mods:classification authorityURI="http://uri.hab.de/vocab/sdd-fachgruppen" displayLabel="SDD Fachgruppen">
+      <xsl:variable name="concept" select="skos:resolve-concept(concat('http://uri.hab.de/vocab/sdd-fachgruppen#fg', .))"/>
+      <xsl:value-of select="skos:resolve-label($concept, 'de')"/>
+    </mods:classification>
+  </xsl:template>
+
   <!-- Sprachcodes -->
   <xsl:template match="datafield[@tag = '010@']">
     <mods:language>
@@ -331,6 +341,18 @@
   <xsl:function name="pica:type" as="xsd:string">
     <xsl:param name="record" as="element(record)"/>
     <xsl:value-of select="substring($record/datafield[@tag = '002@']/subfield[@code = '0'], 2, 1)"/>
+  </xsl:function>
+
+  <xsl:function name="skos:resolve-label" as="element(skos:prefLabel)">
+    <xsl:param name="entity" as="element()"/>
+    <xsl:param name="language" as="xsd:string"/>
+    <xsl:copy-of select="($entity/skos:prefLabel[@xml:lang = $language], $entity/skos:prefLabel[@xml:lang != $language])[1]"/>
+  </xsl:function>
+
+  <xsl:function name="skos:resolve-concept" as="element(skos:Concept)">
+    <xsl:param name="uri" as="xsd:string"/>
+    <xsl:variable name="documentUri" as="xsd:string" select="if (contains($uri, '#')) then substring-before($uri, '#') else $uri"/>
+    <xsl:copy-of select="document($documentUri)//skos:Concept[@rdf:about = $uri]"/>
   </xsl:function>
 
   <xsl:template match="text()"/>
