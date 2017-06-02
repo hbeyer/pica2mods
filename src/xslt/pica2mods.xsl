@@ -229,6 +229,9 @@
             <xsl:value-of select="($field/subfield[@code = 'a'][1], $field/subfield[@code = 'd'][1])"
                           separator=", "/>
           </xsl:when>
+          <xsl:when test="$field/subfield[@code = 'P']">
+            <xsl:value-of select="$field/subfield[@code = 'P']"/>
+          </xsl:when>
           <xsl:otherwise>N.N.</xsl:otherwise>
         </xsl:choose>
         <xsl:if test="$field/subfield[@code = 'l']">
