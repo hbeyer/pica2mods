@@ -295,14 +295,27 @@
 
   <!-- RSWK Schlagwörter -->
   <xsl:template match="datafield[@tag = '044K'][subfield[@code = '0'][starts-with(., 'gnd/')]]">
-    <mods:subject authority="gnd">
-      <mods:topic valueURI="http://d-nb.info/{subfield[@code = '0'][starts-with(., 'gnd/')]}">
-        <xsl:value-of select="subfield[@code = 'a'][1]"/>
-      </mods:topic>
-    </mods:subject>
+    <xsl:variable name="content">
+      <xsl:choose>
+        <xsl:when test="starts-with(subfield[@code = 'M'], 'Tp') or starts-with(subfield[@code = 'M'], 'Tb')">
+          <xsl:value-of select="mods:person(., 'oth')//mods:displayForm"/>
+        </xsl:when>
+        <xsl:otherwise>
+          <xsl:value-of select="subfield[@code = 'a'][1]"/>
+        </xsl:otherwise>
+      </xsl:choose>
+    </xsl:variable>
+
+    <xsl:if test="normalize-space($content)">
+      <mods:subject authority="gnd">
+        <mods:topic valueURI="http://d-nb.info/{subfield[@code = '0'][starts-with(., 'gnd/')]}">
+          <xsl:value-of select="$content"/>
+        </mods:topic>
+      </mods:subject>
+    </xsl:if>
   </xsl:template>
 
-  <xsl:template match="datafield[@tag = '044K']" priority="-1">
+  <xsl:template match="datafield[@tag = '044K'][subfield[@code = 'a']]" priority="-1">
     <mods:subject>
       <mods:topic>
         <xsl:value-of select="subfield[@code = 'a']"/>
