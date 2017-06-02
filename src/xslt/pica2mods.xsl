@@ -196,7 +196,7 @@
   <xsl:function name="mods:person" as="element(mods:name)">
     <xsl:param name="field" as="element(datafield)"/>
     <xsl:param name="role"  as="xsd:string"/>
-    <mods:name type="personal">
+    <mods:name type="{if (starts-with($field/subfield[@code = 'M'], 'Tb')) then 'corporate' else 'personal'}">
       <xsl:if test="$field/subfield[@code = '0'][starts-with(., 'gnd/')]">
         <xsl:attribute name="valueURI" select="concat('http://d-nb.info/', $field/subfield[@code = '0'][starts-with(., 'gnd/')][1])"/>
       </xsl:if>
