@@ -1,0 +1,97 @@
+<description xmlns="http://www.jenitennison.com/xslt/xspec"
+             xmlns:pica="info:srw/schema/5/picaXML-v1.0"
+             xmlns:mods="http://www.loc.gov/mods/v3"
+             stylesheet="../src/xslt/pica2mods.xsl">
+
+  <scenario label="When processing a corporate actor">
+    <context>
+      <pica:record>
+        <pica:datafield tag="033J">
+          <pica:subfield code="9">823930211</pica:subfield>
+          <pica:subfield code="M">Tbv3</pica:subfield>
+          <pica:subfield code="a">Pierre Rigaud &amp; Estienne Michalet</pica:subfield>
+        </pica:datafield>
+      </pica:record>
+    </context>
+    <expect label="create a mods:name with a 'corporate' @type">
+      <mods:mods>
+        <mods:name type="corporate">...</mods:name>
+        <mods:recordInfo>...</mods:recordInfo>
+      </mods:mods>
+    </expect>
+  </scenario>
+
+  <scenario label="When processing a subject heading">
+    <scenario label="pointing to an agent">
+      <context>
+        <pica:record>
+          <pica:datafield tag="044K">
+            <pica:subfield code="9">134535960</pica:subfield>
+            <pica:subfield code="M">Tpv1</pica:subfield>
+            <pica:subfield code="P">Paracelsus</pica:subfield>
+            <pica:subfield code="E">1493</pica:subfield>
+            <pica:subfield code="F">1541</pica:subfield>
+            <pica:subfield code="0">gnd/11859169X</pica:subfield>
+            <pica:subfield code="A">ARK</pica:subfield>
+          </pica:datafield>
+        </pica:record>
+      </context>
+      <expect label="create a mods:subject with proper textual content">
+        <mods:mods>
+          <mods:subject authority="gnd">
+            <mods:topic valueURI="http://d-nb.info/gnd/11859169X">Paracelsus</mods:topic>
+          </mods:subject>
+          <mods:recordInfo>...</mods:recordInfo>
+        </mods:mods>
+      </expect>
+    </scenario>
+    <scenario label="with unavailable text content">
+      <context>
+        <pica:record>
+          <pica:datafield tag="044K">
+            <pica:subfield code="9">134535960</pica:subfield>
+            <pica:subfield code="0">gnd/11859169X</pica:subfield>
+          </pica:datafield>
+        </pica:record>
+      </context>
+      <expect label="do not create a mods:subject">
+        <mods:mods>
+          <mods:recordInfo>...</mods:recordInfo>
+        </mods:mods>
+      </expect>
+    </scenario>
+  </scenario>
+
+  <scenario label="When processing a record with a BAROCK classification">
+    <context>
+      <pica:record>
+        <pica:datafield tag="145Z">
+          <pica:subfield code="a">BAROCK 22 - Einzelne Personen</pica:subfield>
+        </pica:datafield>
+      </pica:record>
+    </context>
+    <expect label="create a mods:classification element with @authorityURI, @valueURI, @displayLabel and the label">
+      <mods:mods>
+        <mods:classification authorityURI="http://uri.hab.de/vocab/barock" valueURI="http://uri.hab.de/vocab/barock#b22" displayLabel="...">Einzelne Personen</mods:classification>
+        <mods:recordInfo>...</mods:recordInfo>
+      </mods:mods>
+    </expect>
+  </scenario>
+
+  <scenario label="When processing a record with a SDD acquisition classification">
+    <context>
+      <pica:record>
+        <pica:datafield tag="145Z">
+          <pica:subfield code="a">02</pica:subfield>
+        </pica:datafield>
+      </pica:record>
+    </context>
+    <expect label="create a mods:classification element with @authorityURI, @valueURI, @displayLabel and the label">
+      <mods:mods>
+        <mods:classification authorityURI="http://uri.hab.de/vocab/sdd-fachgruppen" valueURI="http://uri.hab.de/vocab/sdd-fachgruppen#fg02" displayLabel="...">Philosophie</mods:classification>
+        <mods:recordInfo>...</mods:recordInfo>
+      </mods:mods>
+    </expect>
+  </scenario>
+
+</description>
