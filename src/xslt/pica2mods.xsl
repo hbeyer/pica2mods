@@ -323,6 +323,14 @@
     </mods:classification>
   </xsl:template>
 
+  <!-- Klassifikation der Barocknachrichten -->
+  <xsl:template match="datafield[@tag = '145Z']/subfield[@code = 'a'][matches(., '^BAROCK \d\d -')]">
+    <xsl:variable name="valueURI" select="concat('http://uri.hab.de/vocab/barock#b', tokenize(., ' ')[2])"/>
+    <mods:classification authorityURI="http://uri.hab.de/vocab/barock" valueURI="{$valueURI}" displayLabel="BAROCK Klassifikation">
+      <xsl:value-of select="substring-after(., ' - ')"/>
+    </mods:classification>
+  </xsl:template>
+
   <!-- Sprachcodes -->
   <xsl:template match="datafield[@tag = '010@']">
     <mods:language>
