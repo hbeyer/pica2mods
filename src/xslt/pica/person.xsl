@@ -66,6 +66,16 @@
         </xsl:otherwise>
       </xsl:choose>
     </xsl:variable>
+    <xsl:variable name="person-type">
+      <xsl:choose>
+        <xsl:when test="pica:subfield[@code = '9'] and substring(pica:subfield[@code='M'], 2, 1) = 'b'">
+          <xsl:text>corporate</xsl:text>
+        </xsl:when>
+        <xsl:otherwise>
+          <xsl:text>personal</xsl:text>
+        </xsl:otherwise>
+      </xsl:choose>
+    </xsl:variable>
     <xsl:if test="$person-name-display != ''">
       <xsl:call-template name="person">
         <xsl:with-param name="person-name-family" select="$person-name-family"/>
@@ -81,6 +91,7 @@
             <xsl:text>http://d-nb.info/</xsl:text><xsl:value-of select="pica:subfield[@code='0']"/>
           </xsl:if>
         </xsl:with-param>
+        <xsl:with-param name="person-type" select="$person-type"/>
       </xsl:call-template>
     </xsl:if>
   </xsl:template>

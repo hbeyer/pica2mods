@@ -244,9 +244,10 @@
     <xsl:param name="person-name-prefix"/>
     <xsl:param name="person-name-byname"/>
     <xsl:param name="person-name-personal"/>
+    <xsl:param name="person-type"/>
     <xsl:param name="person-name-display" select="'N.N'"/>
     <xsl:element name="mods:name">
-      <xsl:attribute name="type">personal</xsl:attribute>
+      <xsl:attribute name="type"><xsl:value-of select="$person-type"/></xsl:attribute>
       <xsl:if test="$person-value-uri != ''"><xsl:attribute name="valueURI"><xsl:value-of select="$person-value-uri"/></xsl:attribute></xsl:if>
       <xsl:if test="$person-name-given != ''"><mods:namePart type="given"><xsl:value-of select="$person-name-given"/></mods:namePart></xsl:if>
       <xsl:if test="$person-name-family != ''"><mods:namePart type="family"><xsl:value-of select="$person-name-family"/></mods:namePart></xsl:if>
