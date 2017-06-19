@@ -54,7 +54,7 @@
         </mods:relatedItem>
       </xsl:if>
 
-      <xsl:if test="contains('fF', $record-type)">
+      <xsl:if test="$record-type and contains('fF', $record-type)">
         <!-- Anwendungsprofil 2.0, MD5 baa01054127b5b1a19118caa2cf96558
 
              "Attribute: order enthält als Wert eine positive Zahl. Bei der Verwendung von mods:part
