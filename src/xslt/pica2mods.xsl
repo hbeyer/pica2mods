@@ -1,385 +1,276 @@
 <?xml version="1.0" encoding="utf-8"?>
-<xsl:transform version="2.0"
-               exclude-result-prefixes="#all"
-               xpath-default-namespace="info:srw/schema/5/picaXML-v1.0"
+<xsl:transform version="1.0"
+               exclude-result-prefixes="pica"
+               xmlns:xsl="http://www.w3.org/1999/XSL/Transform"
                xmlns:mods="http://www.loc.gov/mods/v3"
-               xmlns:pica="info:srw/schema/5/picaXML-v1.0"
-               xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
-               xmlns:skos="http://www.w3.org/2004/02/skos/core#"
-               xmlns:xsd="http://www.w3.org/2001/XMLSchema"
-               xmlns:xsl="http://www.w3.org/1999/XSL/Transform">
+               xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+               xmlns:pica="info:srw/schema/5/picaXML-v1.0">
+  <xsl:output method="xml" indent="no"/>
 
-  <xsl:output method="xml" indent="yes" encoding="utf-8"/>
+  <xsl:include href="pica/title.xsl"/>
+  <xsl:include href="pica/identifier.xsl"/>
+  <xsl:include href="pica/classification.xsl"/>
+  <xsl:include href="pica/publication.xsl"/>
+  <xsl:include href="pica/subject.xsl"/>
+  <xsl:include href="pica/person.xsl"/>
+  <xsl:include href="pica/misc.xsl"/>
 
-  <xsl:template match="record">
-    <xsl:variable name="type" select="pica:type(.)"/>
-    <mods:mods>
+  <xsl:param name="unapi-template" select="'http://katalog.hab.de/service/unapi?format=picaxml&amp;id=opac-de-23:ppn:'"/>
+  <xsl:param name="record-source" select="'DE-23'"/>
 
+  <xsl:template match="pica:record">
+    <xsl:variable name="record-type" select="substring(pica:datafield[@tag='002@']/pica:subfield[@code='0'], 2, 1)"/>
+    <xsl:variable name="record-superior-id">
       <xsl:choose>
-        <xsl:when test="$type = 'j'">
-          <xsl:copy-of select="mods:titleInfo(datafield[@tag = '021B'], ())"/>
-        </xsl:when>
-        <!-- Dieser Fall ist noch nicht abgedeckt! Titel steht im übergeordneten Datensatz! -->
-        <xsl:when test="$type = 'f' and not(datafield[@tag = '021A']) and datafield[@tag = '036D']"/>
-        <xsl:when test="datafield[@tag = '021A']">
-          <xsl:copy-of select="mods:titleInfo(datafield[@tag = '021A'], ())"/>
-        </xsl:when>
-      </xsl:choose>
-
-      <xsl:apply-templates/>
-
-      <!-- Physische Beschreibung -->
-      <xsl:if test="datafield[@tag = '034D' or @tag = '034I' or @tag = '034M']">
-        <mods:physicalDescription>
-          <xsl:for-each select="datafield[@tag = '034D' or @tag = '034I' or @tag = '034M']">
-            <mods:extent>
-              <xsl:value-of select="subfield[@code = 'a']" separator="; "/>
-            </mods:extent>
-          </xsl:for-each>
-        </mods:physicalDescription>
-      </xsl:if>
-
-      <!-- Erstveröffentlichung -->
-      <xsl:if test="datafield[@tag = '011@' or @tag = '033A']">
-        <mods:originInfo>
-          <xsl:if test="datafield[@tag = '033A']">
-            <xsl:for-each select="distinct-values(datafield[@tag = '033A']/subfield[@code = 'p'])">
-              <mods:place>
-                <mods:placeTerm type="text">
-                  <xsl:value-of select="."/>
-                </mods:placeTerm>
-              </mods:place>
-            </xsl:for-each>
-            <xsl:for-each select="distinct-values(datafield[@tag = '033A']/subfield[@code = 'n'])">
-              <mods:publisher>
-                <xsl:value-of select="."/>
-              </mods:publisher>
-            </xsl:for-each>
-          </xsl:if>
-          <xsl:if test="datafield[@tag = '011@']/subfield[@code = 'a']">
-            <mods:dateIssued keyDate="yes" encoding="iso8601">
-              <xsl:value-of select="datafield[@tag = '011@']/subfield[@code = 'a'][1]"/>
-            </mods:dateIssued>
-          </xsl:if>
-        </mods:originInfo>
-      </xsl:if>
-
-      <!-- Digitalisat und Vorlage -->
-      <xsl:if test="datafield[@tag = '009A']">
-        <mods:originInfo>
-          <xsl:if test="datafield[@tag = '011B']/subfield[@code = 'a']">
-            <mods:dateCaptured encoding="iso8601">
-              <xsl:value-of select="datafield[@tag = '011B']/subfield[@code = 'a'][1]"/>
-            </mods:dateCaptured>
-          </xsl:if>
-          <mods:publisher>
-            <xsl:value-of select="datafield[@tag = '009A']/subfield[@code = 'c'][1]"/>
-          </mods:publisher>
-          <mods:edition>[Electronic ed.]</mods:edition>
-        </mods:originInfo>
-        <xsl:if test="datafield[@tag = '009A']/subfield[@code = 'a']">
-          <mods:relatedItem type="original">
-            <mods:location>
-              <mods:physicalLocation authority="marcorg">DE-23</mods:physicalLocation>
-              <mods:shelfLocator>
-                <xsl:value-of select="datafield[@tag = '009A']/subfield[@code = 'a'][1]"/>
-              </mods:shelfLocator>
-            </mods:location>
-          </mods:relatedItem>
-        </xsl:if>
-      </xsl:if>
-
-      <!-- Informationen über den Datensatz -->
-      <mods:recordInfo>
-        <mods:recordIdentifier source="DE-23">
-          <xsl:value-of select="datafield[@tag = '003@']/subfield[@code = '0'][1]"/>
-        </mods:recordIdentifier>
-        <mods:recordOrigin xml:lang="en" >Converted from PICA using a local XSL transformation script</mods:recordOrigin>
-        <mods:recordContentSource authority="marcorg" >DE-23</mods:recordContentSource>
-      </mods:recordInfo>
-    </mods:mods>
-  </xsl:template>
-
-  <!-- Signatur -->
-  <xsl:template match="datafield[@tag = '209A']">
-    <xsl:if test="subfield[@code = 'd'] != 'z'">
-      <mods:location>
-        <mods:physicalLocation authority="marcorg">DE-23</mods:physicalLocation>
-        <mods:shelfLocator>
-          <xsl:value-of select="subfield[@code = 'a']"/>
-        </mods:shelfLocator>
-      </mods:location>
-    </xsl:if>
-  </xsl:template>
-
-  <!-- Identifikatoren -->
-  <xsl:template match="datafield[@tag = '004U']/subfield[@code = '0']">
-    <mods:identifier type="urn"><xsl:value-of select="."/></mods:identifier>
-  </xsl:template>
-
-  <xsl:template match="datafield[@tag = '007P']/subfield[@code = '0']">
-    <mods:identifier type="fingerprint"><xsl:value-of select="."/></mods:identifier>
-  </xsl:template>
-
-  <xsl:template match="datafield[@tag = '004A']/subfield[@code = 'A' or @code = '0']">
-    <mods:identifier type="isbn"><xsl:value-of select="."/></mods:identifier>
-  </xsl:template>
-
-  <xsl:template match="datafield[@tag = '007S']/subfield[@code = '0']">
-    <xsl:choose>
-      <xsl:when test="starts-with(., 'VD17 ') and not(../datafield[@tag = '006W'])">
-        <mods:identifier type="vd17"><xsl:value-of select="substring-after(., 'VD17 ')"/></mods:identifier>
-      </xsl:when>
-      <xsl:when test="starts-with(., 'VD16 ')">
-        <mods:identifier type="vd16"><xsl:value-of select="substring-after(., 'VD16 ')"/></mods:identifier>
-      </xsl:when>
-    </xsl:choose>
-  </xsl:template>
-
-  <xsl:template match="datafield[@tag = '009P'][@occurrence = '03']/subfield[@code = 'a']">
-    <xsl:if test="starts-with(., 'http://diglib.hab.de')">
-      <mods:identifier type="purl"><xsl:value-of select="."/></mods:identifier>
-    </xsl:if>
-  </xsl:template>
-
-  <!-- Personen -->
-  <!-- Verfasser -->
-  <xsl:template match="datafield[@tag = '028A' or @tag = '028B']">
-    <xsl:copy-of select="mods:person(., 'aut')"/>
-  </xsl:template>
-
-  <!-- Drucker, Verleger, oder Buchhändler bei alten Drucken -->
-  <xsl:template match="datafield[@tag='033J']">
-    <xsl:copy-of select="mods:person(., 'prt')"/>
-  </xsl:template>
-
-  <!-- Gefeierte Person -->
-  <xsl:template match="datafield[@tag='028F']">
-    <xsl:copy-of select="mods:person(., 'hnf')"/>
-  </xsl:template>
-
-  <!-- Sonstige nicht beteiligte Personen -->
-  <xsl:template match="datafield[@tag='028G']">
-    <xsl:copy-of select="mods:person(., 'asn')"/>
-  </xsl:template>
-
-  <!-- Konkurrenzverfasser -->
-  <xsl:template match="datafield[@tag='028M']">
-    <xsl:copy-of select="mods:person(., 'oth')"/>
-  </xsl:template>
-
-  <!-- Widmungsempfänger -->
-  <xsl:template match="datafield[@tag='028L'][not(@occurrence)]">
-    <xsl:copy-of select="mods:person(., 'dte')"/>
-  </xsl:template>
-
-  <!-- Zensor -->
-  <xsl:template match="datafield[@tag='028L'][@occurrence = '01']">
-    <xsl:copy-of select="mods:person(., 'cns')"/>
-  </xsl:template>
-
-  <!-- literarische/künstlerische/musikalische Beiträger -->
-  <xsl:template match="datafield[@tag='028L'][@occurrence = '02']">
-    <xsl:copy-of select="mods:person(., 'clb')"/>
-  </xsl:template>
-
-  <!-- Sonstige beteiligte Personen -->
-  <xsl:template match="datafield[@tag='028C' or @tag='028D']">
-    <xsl:copy-of select="mods:person(., 'oth')"/>
-  </xsl:template>
-
-  <!-- Sonstige nichtbeteiligte bzw. im Sachtitel genannte Personen -->
-  <xsl:template match="datafield[@tag='028L'][@occurrence = '03']">
-    <xsl:copy-of select="mods:person(., 'asn')"/>
-  </xsl:template>
-
-  <xsl:function name="mods:person" as="element(mods:name)">
-    <xsl:param name="field" as="element(datafield)"/>
-    <xsl:param name="role"  as="xsd:string"/>
-    <mods:name type="{if (starts-with($field/subfield[@code = 'M'], 'Tb')) then 'corporate' else 'personal'}">
-      <xsl:if test="$field/subfield[@code = '0'][starts-with(., 'gnd/')]">
-        <xsl:attribute name="valueURI" select="concat('http://d-nb.info/', $field/subfield[@code = '0'][starts-with(., 'gnd/')][1])"/>
-      </xsl:if>
-      <xsl:if test="$field/subfield[@code = 'a']">
-        <mods:namePart type="family">
-          <xsl:value-of select="$field/subfield[@code = 'a'][1]"/>
-        </mods:namePart>
-      </xsl:if>
-      <xsl:if test="$field/subfield[@code = 'd']">
-        <mods:namePart type="given">
-          <xsl:value-of select="$field/subfield[@code = 'd'][1]"/>
-        </mods:namePart>
-      </xsl:if>
-      <xsl:if test="$field/subfield[@code = 'h']">
-        <mods:namePart type="date">
-          <xsl:value-of select="$field/subfield[@code = 'h'][1]"/>
-        </mods:namePart>
-      </xsl:if>
-      <xsl:if test="$field/subfield[@code = 'l']">
-        <mods:namePart type="termsOfAddress">
-          <xsl:value-of select="$field/subfield[@code = 'l'][1]"/>
-        </mods:namePart>
-      </xsl:if>
-      <mods:displayForm>
-        <xsl:choose>
-          <xsl:when test="$field/subfield[@code = '8']">
-            <xsl:value-of select="$field/subfield[@code = '8'][1]"/>
-          </xsl:when>
-          <xsl:when test="$field/subfield[@code = 'a' or @code = 'd']">
-            <xsl:value-of select="($field/subfield[@code = 'a'][1], $field/subfield[@code = 'd'][1])"
-                          separator=", "/>
-          </xsl:when>
-          <xsl:when test="$field/subfield[@code = 'P']">
-            <xsl:value-of select="$field/subfield[@code = 'P']"/>
-          </xsl:when>
-          <xsl:otherwise>N.N.</xsl:otherwise>
-        </xsl:choose>
-        <xsl:if test="$field/subfield[@code = 'l']">
-          <xsl:value-of select="concat(' &lt;', $field/subfield[@code = 'l'][1], '&gt;')"/>
-        </xsl:if>
-        <xsl:if test="$field/subfield[@code = 'h']">
-          <xsl:value-of select="concat(', ', $field/subfield[@code = 'h'][1])"/>
-        </xsl:if>
-      </mods:displayForm>
-      <mods:role>
-        <mods:roleTerm authority="marcrelator" type="code" valueURI="http://id.loc.gov/vocabulary/relators/{$role}">
-          <xsl:value-of select="$role"/>
-        </mods:roleTerm>
-      </mods:role>
-    </mods:name>
-  </xsl:function>
-
-  <!-- Titel -->
-  <!-- Einheitssachtitel -->
-  <xsl:template match="datafield[@tag = '022A'][@occurrence = '01']">
-    <xsl:copy-of select="mods:titleInfo(., 'uniform')"/>
-  </xsl:template>
-
-  <!-- Weitere Sachtitel -->
-  <xsl:template match="datafield[@tag = '027A']">
-    <xsl:copy-of select="mods:titleInfo(., 'alternative')"/>
-  </xsl:template>
-
-  <!-- Titel in Bandsätzen und Aufsätzen (für die Anzeige usw.) -->
-  <xsl:template match="datafield[@tag = '027D']">
-    <xsl:copy-of select="mods:titleInfo(., 'alternative')"/>
-  </xsl:template>
-
-  <!-- Normierter Zeitschriftenkurztitel b- und d-Sätze -->
-  <xsl:template match="datafield[@tag = '026C']">
-    <xsl:variable name="type" select="pica:type(..)"/>
-    <xsl:if test="$type = 'b' or $type = 'd'">
-      <xsl:copy-of select="mods:titleInfo(., 'abbreviated')"/>
-    </xsl:if>
-  </xsl:template>
-
-  <xsl:function name="mods:titleInfo" as="element(mods:titleInfo)">
-    <xsl:param name="datafield" as="element()"/>
-    <xsl:param name="mods:type" as="xsd:string?" />
-    <mods:titleInfo>
-      <xsl:if test="$mods:type"><xsl:attribute name="type" select="$mods:type"/></xsl:if>
-      <xsl:choose>
-        <xsl:when test="contains($datafield/subfield[@code = 'a'], '@')">
-          <mods:nonSort><xsl:value-of select="substring-before($datafield/subfield[@code = 'a'], '@')"/></mods:nonSort>
-          <mods:title><xsl:value-of select="substring-after($datafield/subfield[@code = 'a'], '@')"/></mods:title>
-        </xsl:when>
-        <xsl:otherwise>
-          <mods:title><xsl:value-of select="$datafield/subfield[@code = 'a']"/></mods:title>
-        </xsl:otherwise>
-      </xsl:choose>
-      <xsl:if test="$datafield/subfield[@code = 'd']">
-        <mods:subTitle><xsl:value-of select="$datafield/subfield[@code = 'd']"/></mods:subTitle>
-      </xsl:if>
-    </mods:titleInfo>
-  </xsl:function>
-
-  <!-- RSWK Schlagwörter -->
-  <xsl:template match="datafield[@tag = '044K'][subfield[@code = '0'][starts-with(., 'gnd/')]]">
-    <xsl:variable name="content">
-      <xsl:choose>
-        <xsl:when test="starts-with(subfield[@code = 'M'], 'Tp') or starts-with(subfield[@code = 'M'], 'Tb')">
-          <xsl:value-of select="mods:person(., 'oth')//mods:displayForm"/>
-        </xsl:when>
-        <xsl:otherwise>
-          <xsl:value-of select="subfield[@code = 'a'][1]"/>
-        </xsl:otherwise>
+        <xsl:when test="$record-type = 'j'"><xsl:value-of select="pica:datafield[@tag='021A']/pica:subfield[@code='9']"/></xsl:when>
+        <xsl:otherwise><xsl:value-of select="pica:datafield[@tag='036D']/pica:subfield[@code='9']"/></xsl:otherwise>
       </xsl:choose>
     </xsl:variable>
 
-    <xsl:if test="normalize-space($content)">
-      <mods:subject authority="gnd">
-        <mods:topic valueURI="http://d-nb.info/{subfield[@code = '0'][starts-with(., 'gnd/')]}">
-          <xsl:value-of select="$content"/>
-        </mods:topic>
-      </mods:subject>
+    <mods:mods xsi:schemaLocation="http://www.loc.gov/mods/v3 http://www.loc.gov/standards/mods/v3/mods-3-4.xsd">
+      <xsl:apply-templates mode="title"/>
+      <xsl:apply-templates mode="identifier"/>
+      <xsl:apply-templates mode="classification"/>
+      <xsl:apply-templates mode="publication"/>
+      <xsl:apply-templates mode="person"/>
+      <xsl:apply-templates mode="misc"/>
+
+      <xsl:if test="pica:datafield[@tag='044K' and starts-with(pica:subfield[@code='M'], 'T')]">
+        <mods:subject authority="gnd">
+          <xsl:apply-templates mode="subject-gnd"/>
+        </mods:subject>
+      </xsl:if>
+
+      <xsl:if test="pica:datafield[@tag='034D' or @tag='034I' or @tag='034K' or @tag='034M']">
+        <mods:physicalDescription>
+          <xsl:apply-templates select="pica:datafield[@tag='034D' or @tag='034I' or @tag='034K' or @tag='034M']"/>
+        </mods:physicalDescription>
+      </xsl:if>
+
+      <xsl:if test="$record-superior-id != ''">
+        <xsl:variable name="record-superior" select="document(concat($unapi-template, $record-superior-id))"/>
+        <mods:relatedItem type="host">
+          <xsl:apply-templates mode="title" select="$record-superior/pica:record"/>
+        </mods:relatedItem>
+      </xsl:if>
+
+      <xsl:if test="contains('fF', $record-type)">
+        <!-- Anwendungsprofil 2.0, MD5 baa01054127b5b1a19118caa2cf96558
+
+             "Attribute: order enthält als Wert eine positive Zahl. Bei der Verwendung von mods:part
+             ist das Attribut verpflichtend."
+
+             Positive Zahl ist kein Problem. Eine positive Zahl die die Ordnung der Untergeordneten
+             innerhalb der sortierten Aggregation der Übergeordneten repräsenitert - NOT. Ist nicht
+             aus der Untergeordneten ablesbar.
+
+        -->
+        <mods:part order="1">
+          <mods:detail type="volume">
+            <mods:number>
+              <!-- Sortierzählung verwenden wenn keine Vorlagezählung vorhanden -->
+              <xsl:choose>
+                <xsl:when test="pica:datafield[@tag='036D']/pica:subfield[@code='l']">
+                  <xsl:value-of select="pica:datafield[@tag='036D']/pica:subfield[@code='l']"/>
+                </xsl:when>
+                <xsl:otherwise>
+                  <xsl:value-of select="pica:datafield[@tag='036D']/pica:subfield[@code='X']"/>
+                </xsl:otherwise>
+              </xsl:choose>
+            </mods:number>
+          </mods:detail>
+        </mods:part>
+      </xsl:if>
+
+      <mods:recordInfo>
+        <mods:recordIdentifier source="DE-23"><xsl:value-of select="pica:datafield[@tag='003@']/pica:subfield[@code='0']"/></mods:recordIdentifier>
+        <mods:recordOrigin xml:lang="en">Converted from PICA using a local XSL transformation script</mods:recordOrigin>
+        <mods:recordContentSource authority="marcorg"><xsl:value-of select="$record-source"/></mods:recordContentSource>
+      </mods:recordInfo>
+
+    </mods:mods>
+  </xsl:template>
+
+  <xsl:template name="title">
+    <xsl:param name="title"/>
+    <xsl:param name="subtitle"/>
+    <xsl:param name="author-statement"/>
+    <xsl:param name="type"/>
+    <xsl:element name="mods:titleInfo">
+      <xsl:if test="$type != ''">
+        <xsl:attribute name="type"><xsl:value-of select="$type"/></xsl:attribute>
+      </xsl:if>
+      <xsl:choose>
+        <xsl:when test="contains($title, '@')">
+          <xsl:variable name="mods:nonSort" select="normalize-space(substring-before($title, '@'))"/>
+          <xsl:if test="$mods:nonSort != ''">
+            <mods:nonSort><xsl:value-of select="normalize-space(substring-before($title, '@'))"/></mods:nonSort>
+          </xsl:if>
+          <mods:title><xsl:value-of select="substring-after($title, '@')"/></mods:title>
+        </xsl:when>
+        <xsl:otherwise>
+          <mods:title><xsl:value-of select="$title"/></mods:title>
+        </xsl:otherwise>
+      </xsl:choose>
+      <xsl:if test="$subtitle != ''">
+        <mods:subTitle><xsl:value-of select="$subtitle"/></mods:subTitle>
+      </xsl:if>
+      </xsl:element>
+  </xsl:template>
+
+  <xsl:template name="identifier">
+    <xsl:param name="identifier"/>
+    <xsl:param name="identifier-type"/>
+    <xsl:element name="mods:identifier">
+      <xsl:if test="$identifier-type != ''">
+        <xsl:attribute name="type"><xsl:value-of select="$identifier-type"/></xsl:attribute>
+      </xsl:if>
+      <xsl:value-of select="$identifier"/>
+    </xsl:element>
+  </xsl:template>
+
+  <xsl:template name="classification">
+    <xsl:param name="classification"/>
+    <xsl:param name="classification-label"/>
+    <xsl:param name="classification-authority"/>
+    <xsl:param name="classification-uri"/>
+    <xsl:element name="mods:classification">
+      <xsl:if test="$classification-authority != ''">
+        <xsl:attribute name="authority"><xsl:value-of select="$classification-authority"/></xsl:attribute>
+      </xsl:if>
+      <xsl:if test="$classification-uri != ''">
+        <xsl:attribute name="valueURI"><xsl:value-of select="$classification-uri"/></xsl:attribute>
+      </xsl:if>
+      <xsl:value-of select="$classification"/>
+    </xsl:element>
+  </xsl:template>
+
+  <xsl:template name="language">
+    <xsl:param name="language-code"/>
+    <xsl:for-each select="$language-code">
+      <mods:language>
+        <mods:languageTerm type="code" authority="iso639-2b"><xsl:value-of select="."/></mods:languageTerm>
+      </mods:language>
+    </xsl:for-each>
+  </xsl:template>
+
+  <xsl:template name="description">
+    <xsl:param name="description"/>
+    <mods:extent><xsl:value-of select="$description"/></mods:extent>
+  </xsl:template>
+
+  <xsl:template name="genre">
+    <xsl:param name="genre"/>
+    <xsl:param name="genre-authority"/>
+    <xsl:element name="mods:genre">
+      <xsl:if test="$genre-authority != ''">
+        <xsl:attribute name="authority"><xsl:value-of select="$genre-authority"/></xsl:attribute>
+      </xsl:if>
+      <xsl:value-of select="$genre"/>
+    </xsl:element>
+  </xsl:template>
+
+  <xsl:template name="publication">
+    <xsl:param name="publication-date"/>
+    <xsl:param name="publication-date-type"/>
+    <xsl:param name="publication-place"/>
+    <xsl:param name="publication-publisher"/>
+    <xsl:param name="publication-edition"/>
+    <mods:originInfo>
+      <xsl:if test="$publication-date != ''">
+        <xsl:element name="mods:{$publication-date-type}">
+          <xsl:if test="$publication-date-type = 'dateIssued'">
+            <xsl:attribute name="keyDate">yes</xsl:attribute>
+          </xsl:if>
+          <xsl:attribute name="encoding">iso8601</xsl:attribute>
+          <xsl:value-of select="$publication-date"/>
+        </xsl:element>
+      </xsl:if>
+      <xsl:if test="$publication-place != ''">
+        <mods:place>
+          <mods:placeTerm type="text"><xsl:value-of select="$publication-place"/></mods:placeTerm>
+        </mods:place>
+      </xsl:if>
+      <xsl:if test="$publication-publisher != ''">
+        <mods:publisher><xsl:value-of select="$publication-publisher"/></mods:publisher>
+      </xsl:if>
+      <xsl:if test="$publication-edition != ''">
+        <mods:edition><xsl:value-of select="$publication-edition"/></mods:edition>
+      </xsl:if>
+    </mods:originInfo>
+  </xsl:template>
+
+  <xsl:template name="location">
+    <xsl:param name="location-shelf"/>
+    <mods:location>
+      <mods:physicalLocation authority="marcorg">DE-23</mods:physicalLocation>
+      <xsl:if test="$location-shelf != ''">
+        <mods:shelfLocator><xsl:value-of select="$location-shelf"/></mods:shelfLocator>
+      </xsl:if>
+    </mods:location>
+  </xsl:template>
+
+  <xsl:template name="related">
+    <xsl:param name="related-type"/>
+    <xsl:param name="related-title"/>
+    <xsl:if test="$related-title">
+      <xsl:element name="mods:relatedItem">
+        <xsl:if test="$related-type">
+          <xsl:attribute name="type"><xsl:value-of select="$related-type"/></xsl:attribute>
+        </xsl:if>
+        <mods:titleInfo>
+          <mods:title><xsl:value-of select="$related-title"/></mods:title>
+        </mods:titleInfo>
+      </xsl:element>
     </xsl:if>
   </xsl:template>
 
-  <xsl:template match="datafield[@tag = '044K'][subfield[@code = 'a']]" priority="-1">
-    <mods:subject>
-      <mods:topic>
-        <xsl:value-of select="subfield[@code = 'a']"/>
-      </mods:topic>
-    </mods:subject>
+  <xsl:template name="subject">
+    <xsl:param name="subject"/>
+    <xsl:param name="subject-value-uri"/>
+    <xsl:param name="subject-type"/>
+    <xsl:element name="mods:{$subject-type}">
+      <xsl:if test="$subject-value-uri != ''">
+        <xsl:attribute name="valueURI"><xsl:value-of select="$subject-value-uri"/></xsl:attribute>
+      </xsl:if>
+      <xsl:value-of select="$subject"/>
+    </xsl:element>
   </xsl:template>
 
-  <!-- AAD Gattungsbegriffe -->
-  <xsl:template match="datafield[@tag = '044S']">
-    <mods:genre authority="aad">
-      <xsl:value-of select="subfield[@code = 'a'][1]"/>
-    </mods:genre>
+  <xsl:template name="person">
+    <xsl:param name="person-role"/>
+    <xsl:param name="person-value-uri"/>
+    <xsl:param name="person-name-family"/>
+    <xsl:param name="person-name-given"/>
+    <xsl:param name="person-name-prefix"/>
+    <xsl:param name="person-name-byname"/>
+    <xsl:param name="person-name-personal"/>
+    <xsl:param name="person-name-display" select="'N.N'"/>
+    <xsl:element name="mods:name">
+      <xsl:attribute name="type">personal</xsl:attribute>
+      <xsl:if test="$person-value-uri != ''"><xsl:attribute name="valueURI"><xsl:value-of select="$person-value-uri"/></xsl:attribute></xsl:if>
+      <xsl:if test="$person-name-given != ''"><mods:namePart type="given"><xsl:value-of select="$person-name-given"/></mods:namePart></xsl:if>
+      <xsl:if test="$person-name-family != ''"><mods:namePart type="family"><xsl:value-of select="$person-name-family"/></mods:namePart></xsl:if>
+      <xsl:if test="$person-name-byname  != ''"><mods:namePart type="termsOfAddress"><xsl:value-of select="$person-name-byname"/></mods:namePart></xsl:if>
+      <mods:displayForm><xsl:value-of select="$person-name-display"/></mods:displayForm>
+      <mods:role>
+        <xsl:element name="mods:roleTerm">
+          <xsl:attribute name="authority">marcrelator</xsl:attribute>
+          <xsl:attribute name="type">code</xsl:attribute>
+          <xsl:attribute name="valueURI">http://id.loc.gov/vocabulary/relators/<xsl:value-of select="$person-role"/></xsl:attribute>
+          <xsl:value-of select="$person-role"/>
+        </xsl:element>
+      </mods:role>
+    </xsl:element>
   </xsl:template>
-
-  <!-- Fachgruppen der Sammlung Deutscher Drucke -->
-  <xsl:template match="datafield[@tag = '145Z']/subfield[@code = 'a'][matches(., '^\d\d$')]">
-    <xsl:variable name="valueURI" select="concat('http://uri.hab.de/vocab/sdd-fachgruppen#fg', .)"/>
-    <xsl:variable name="concept" select="skos:resolve-concept($valueURI)"/>
-    <mods:classification authorityURI="http://uri.hab.de/vocab/sdd-fachgruppen" valueURI="{$valueURI}" displayLabel="SDD Fachgruppen">
-      <xsl:value-of select="skos:resolve-label($concept, 'de')"/>
-    </mods:classification>
-  </xsl:template>
-
-  <!-- Klassifikation der Barocknachrichten -->
-  <xsl:template match="datafield[@tag = '145Z']/subfield[@code = 'a'][matches(., '^BAROCK \d\d -')]">
-    <xsl:variable name="valueURI" select="concat('http://uri.hab.de/vocab/barock#b', tokenize(., ' ')[2])"/>
-    <mods:classification authorityURI="http://uri.hab.de/vocab/barock" valueURI="{$valueURI}" displayLabel="BAROCK Klassifikation">
-      <xsl:value-of select="substring-after(., ' - ')"/>
-    </mods:classification>
-  </xsl:template>
-
-  <!-- Sprachcodes -->
-  <xsl:template match="datafield[@tag = '010@']">
-    <mods:language>
-      <xsl:for-each select="subfield[@code = 'a']">
-        <mods:languageTerm type="code" authority="iso639-2b">
-          <xsl:value-of select="."/>
-        </mods:languageTerm>
-      </xsl:for-each>
-    </mods:language>
-  </xsl:template>
-
-  <!-- Bemerkung -->
-  <xsl:template match="datafield[@tag='037A']">
-    <mods:note><xsl:value-of select="subfield[@code='a']" separator="; "/></mods:note>
-  </xsl:template>
-
-  <xsl:function name="pica:type" as="xsd:string">
-    <xsl:param name="record" as="element(record)"/>
-    <xsl:value-of select="substring($record/datafield[@tag = '002@']/subfield[@code = '0'], 2, 1)"/>
-  </xsl:function>
-
-  <xsl:function name="skos:resolve-label" as="element(skos:prefLabel)">
-    <xsl:param name="entity" as="element()"/>
-    <xsl:param name="language" as="xsd:string"/>
-    <xsl:copy-of select="($entity/skos:prefLabel[@xml:lang = $language], $entity/skos:prefLabel[@xml:lang != $language])[1]"/>
-  </xsl:function>
-
-  <xsl:function name="skos:resolve-concept" as="element(skos:Concept)">
-    <xsl:param name="uri" as="xsd:string"/>
-    <xsl:variable name="documentUri" as="xsd:string" select="if (contains($uri, '#')) then substring-before($uri, '#') else $uri"/>
-    <xsl:copy-of select="document($documentUri)//skos:Concept[@rdf:about = $uri]"/>
-  </xsl:function>
 
   <xsl:template match="text()"/>
+  <xsl:template match="text()" mode="title"/>
+  <xsl:template match="text()" mode="identifier"/>
+  <xsl:template match="text()" mode="classification"/>
+  <xsl:template match="text()" mode="publication"/>
+  <xsl:template match="text()" mode="subject-gnd"/>
+  <xsl:template match="text()" mode="person"/>
+  <xsl:template match="text()" mode="misc"/>
 
 </xsl:transform>
