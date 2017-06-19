@@ -132,13 +132,20 @@
     <xsl:param name="classification"/>
     <xsl:param name="classification-label"/>
     <xsl:param name="classification-authority"/>
+    <xsl:param name="classification-authority-uri"/>
     <xsl:param name="classification-uri"/>
     <xsl:element name="mods:classification">
       <xsl:if test="$classification-authority != ''">
         <xsl:attribute name="authority"><xsl:value-of select="$classification-authority"/></xsl:attribute>
       </xsl:if>
+      <xsl:if test="$classification-authority-uri != ''">
+        <xsl:attribute name="authorityURI"><xsl:value-of select="$classification-authority-uri"/></xsl:attribute>
+      </xsl:if>
       <xsl:if test="$classification-uri != ''">
         <xsl:attribute name="valueURI"><xsl:value-of select="$classification-uri"/></xsl:attribute>
+      </xsl:if>
+      <xsl:if test="$classification-label != ''">
+        <xsl:attribute name="displayLabel"><xsl:value-of select="$classification-label"/></xsl:attribute>
       </xsl:if>
       <xsl:value-of select="$classification"/>
     </xsl:element>

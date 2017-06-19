@@ -40,4 +40,15 @@
     </xsl:call-template>
   </xsl:template>
 
+  <!-- BAROCK Klassifikation -->
+  <xsl:template match="pica:datafield[@tag = '145Z'][starts-with(pica:subfield[@code = 'a'], 'BAROCK')]" mode="classification">
+    <xsl:variable name="valueURI" select="concat('http://uri.hab.de/vocab/barock#b', substring-before(substring-after(pica:subfield[@code = 'a'], ' '), ' '))"/>
+    <xsl:call-template name="classification">
+      <xsl:with-param name="classification-label" select="'BAROCK Klassifikation'"/>
+      <xsl:with-param name="classification" select="substring-after(pica:subfield[@code='a'], ' - ')"/>
+      <xsl:with-param name="classification-authority-uri" select="'http://uri.hab.de/vocab/barock'"/>
+      <xsl:with-param name="classification-uri" select="$valueURI"/>
+    </xsl:call-template>
+  </xsl:template>
+
 </xsl:transform>
