@@ -3,7 +3,6 @@
                exclude-result-prefixes="pica"
                xmlns:xsl="http://www.w3.org/1999/XSL/Transform"
                xmlns:mods="http://www.loc.gov/mods/v3"
-               xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
                xmlns:pica="info:srw/schema/5/picaXML-v1.0">
   <xsl:output method="xml" indent="no"/>
 
@@ -27,7 +26,7 @@
       </xsl:choose>
     </xsl:variable>
 
-    <mods:mods xsi:schemaLocation="http://www.loc.gov/mods/v3 http://www.loc.gov/standards/mods/v3/mods-3-4.xsd">
+    <mods:mods>
       <xsl:apply-templates mode="title"/>
       <xsl:apply-templates mode="identifier"/>
       <xsl:apply-templates mode="classification"/>
