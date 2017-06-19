@@ -21,9 +21,9 @@
         </xsl:when>
         <!-- Dieser Fall ist noch nicht abgedeckt! Titel steht im übergeordneten Datensatz! -->
         <xsl:when test="$type = 'f' and not(datafield[@tag = '021A']) and datafield[@tag = '036D']"/>
-        <xsl:otherwise>
+        <xsl:when test="datafield[@tag = '021A']">
           <xsl:copy-of select="mods:titleInfo(datafield[@tag = '021A'], ())"/>
-        </xsl:otherwise>
+        </xsl:when>
       </xsl:choose>
 
       <xsl:apply-templates/>
