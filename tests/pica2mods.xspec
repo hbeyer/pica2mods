@@ -94,4 +94,20 @@
     </expect>
   </scenario>
 
+  <scenario label="When processing a VD18 record">
+    <context>
+      <pica:record>
+        <pica:datafield tag="006M">
+          <pica:subfield code="0">VD18 12864358</pica:subfield>
+        </pica:datafield>
+      </pica:record>
+    </context>
+    <expect label="create a mods:identifier">
+      <mods:mods>
+        <mods:identifier type="vd18">12864358</mods:identifier>
+        <mods:recordInfo>...</mods:recordInfo>
+      </mods:mods>
+    </expect>
+  </scenario>
+
 </description>

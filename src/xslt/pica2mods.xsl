@@ -125,6 +125,10 @@
     <mods:identifier type="isbn"><xsl:value-of select="."/></mods:identifier>
   </xsl:template>
 
+  <xsl:template match="datafield[@tag = '006M']/subfield[@code = '0']">
+    <mods:identifier type="vd18"><xsl:value-of select="substring-after(., 'VD18 ')"/></mods:identifier>
+  </xsl:template>
+
   <xsl:template match="datafield[@tag = '007S']/subfield[@code = '0']">
     <xsl:choose>
       <xsl:when test="starts-with(., 'VD17 ') and not(../datafield[@tag = '006W'])">
