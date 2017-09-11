@@ -29,7 +29,7 @@
         <xsl:call-template name="identifier">
           <xsl:with-param name="identifier-type" select="'purl'"/>
           <xsl:with-param name="identifier">
-	    <xsl:value-of select="pica:subfield[@code='a']"/>
+            <xsl:value-of select="pica:subfield[@code='a']"/>
           </xsl:with-param>
         </xsl:call-template>
       </xsl:when>
@@ -58,6 +58,13 @@
   </xsl:template>
 
   <!-- Bibliographische Zitate -->
+  <xsl:template match="pica:datafield[@tag='006M']" mode="identifier">
+    <xsl:call-template name="identifier">
+      <xsl:with-param name="identifier" select="substring-after(pica:subfield[@code='0'], 'VD18 ')"/>
+      <xsl:with-param name="identifier-type" select="'vd18'"/>
+    </xsl:call-template>
+  </xsl:template>
+
   <xsl:template match="pica:datafield[@tag='007S']" mode="identifier">
     <xsl:if test="not(pica:subfield[@code='S'])">
       <xsl:choose>
