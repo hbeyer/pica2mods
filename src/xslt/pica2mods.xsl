@@ -220,8 +220,12 @@
     <xsl:param name="related-type"/>
     <xsl:param name="related-title"/>
     <xsl:param name="related-record-identifier"/>
+    <xsl:param name="related-label"/>
     <xsl:if test="$related-title or $related-record-identifier">
       <xsl:element name="mods:relatedItem">
+        <xsl:if test="$related-label">
+          <xsl:attribute name="displayLabel"><xsl:value-of select="$related-label"/></xsl:attribute>
+        </xsl:if>
         <xsl:if test="$related-type">
           <xsl:attribute name="type"><xsl:value-of select="$related-type"/></xsl:attribute>
         </xsl:if>

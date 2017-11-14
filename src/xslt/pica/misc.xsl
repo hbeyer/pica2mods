@@ -45,14 +45,16 @@
 
   <!-- Horizontale Verknüpfungen -->
   <xsl:template match="pica:datafield[@tag = '039D']" mode="misc">
-    <xsl:choose>
-      <xsl:when test="pica:subfield[@code = 'c'] = 'Online-Ausg.' or pica:subfield[@code = 'c'] = 'Druckausg.'">
-        <xsl:call-template name="related">
-          <xsl:with-param name="related-type" select="'otherFormat'"/>
-          <xsl:with-param name="related-record-identifier" select="concat(pica:subfield[@code = 'C'], ' ', pica:subfield[@code = '6'])"/>
-        </xsl:call-template>
-      </xsl:when>
-    </xsl:choose>
+    <xsl:call-template name="related">
+      <xsl:with-param name="related-record-identifier" select="concat(pica:subfield[@code = 'C'], ' ', pica:subfield[@code = '6'])"/>
+      <xsl:with-param name="related-label" select="normalize-space(concat(pica:subfield[@code = 'c'], ' ', pica:subfield[@code = 'n']))"/>
+      <xsl:with-param name="related-title">
+        <xsl:choose>
+          <xsl:when test="pica:subfield[@code = 'a']"><xsl:value-of select="pica:subfield[@code = 'a']"/></xsl:when>
+          <xsl:when test="pica:subfield[@code = 't']"><xsl:value-of select="pica:subfield[@code = 't']"/></xsl:when>
+        </xsl:choose>
+      </xsl:with-param>
+    </xsl:call-template>
   </xsl:template>
 
 </xsl:transform>

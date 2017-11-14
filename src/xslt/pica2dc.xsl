@@ -137,6 +137,7 @@
     <xsl:param name="related-title"/>
     <xsl:param name="related-type"/>
     <xsl:param name="related-record-identifier"/>
+    <xsl:param name="related-label"/>
     <xsl:if test="$related-title != ''">
       <dc:relation><xsl:value-of select="$related-title"/></dc:relation>
     </xsl:if>
