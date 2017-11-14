@@ -219,14 +219,22 @@
   <xsl:template name="related">
     <xsl:param name="related-type"/>
     <xsl:param name="related-title"/>
-    <xsl:if test="$related-title">
+    <xsl:param name="related-record-identifier"/>
+    <xsl:if test="$related-title or $related-record-identifier">
       <xsl:element name="mods:relatedItem">
         <xsl:if test="$related-type">
           <xsl:attribute name="type"><xsl:value-of select="$related-type"/></xsl:attribute>
         </xsl:if>
-        <mods:titleInfo>
-          <mods:title><xsl:value-of select="$related-title"/></mods:title>
-        </mods:titleInfo>
+        <xsl:if test="$related-title">
+          <mods:titleInfo>
+            <mods:title><xsl:value-of select="$related-title"/></mods:title>
+          </mods:titleInfo>
+        </xsl:if>
+        <xsl:if test="$related-record-identifier">
+          <mods:recordInfo>
+            <mods:recordIdentifier><xsl:value-of select="$related-record-identifier"/></mods:recordIdentifier>
+          </mods:recordInfo>
+        </xsl:if>
       </xsl:element>
     </xsl:if>
   </xsl:template>

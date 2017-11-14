@@ -43,4 +43,16 @@
     </xsl:if>
   </xsl:template>
 
+  <!-- Horizontale Verknüpfungen -->
+  <xsl:template match="pica:datafield[@tag = '039D']" mode="misc">
+    <xsl:choose>
+      <xsl:when test="pica:subfield[@code = 'c'] = 'Online-Ausg.' or pica:subfield[@code = 'c'] = 'Druckausg.'">
+        <xsl:call-template name="related">
+          <xsl:with-param name="related-type" select="'otherFormat'"/>
+          <xsl:with-param name="related-record-identifier" select="concat(pica:subfield[@code = 'C'], ' ', pica:subfield[@code = '6'])"/>
+        </xsl:call-template>
+      </xsl:when>
+    </xsl:choose>
+  </xsl:template>
+
 </xsl:transform>

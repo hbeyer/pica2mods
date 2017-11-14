@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
 <xsl:transform version="1.0"
-	       xmlns:xsl="http://www.w3.org/1999/XSL/Transform"
-	       xmlns:dc="http://purl.org/dc/elements/1.1/"
-	       xmlns:pica="info:srw/schema/5/picaXML-v1.0">
+               xmlns:xsl="http://www.w3.org/1999/XSL/Transform"
+               xmlns:dc="http://purl.org/dc/elements/1.1/"
+               xmlns:pica="info:srw/schema/5/picaXML-v1.0">
   <xsl:output method="xml" indent="yes"/>
 
   <xsl:include href="pica/title.xsl"/>
@@ -16,9 +16,9 @@
 
   <xsl:template match="pica:record">
     <oai_dc:dc xmlns:oai_dc="http://www.openarchives.org/OAI/2.0/oai_dc/"
-	       xmlns:dc="http://purl.org/dc/elements/1.1/"
-	       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-	       xsi:schemaLocation="http://www.openarchives.org/OAI/2.0/oai_dc/ http://www.openarchives.org/OAI/2.0/oai_dc.xsd">
+               xmlns:dc="http://purl.org/dc/elements/1.1/"
+               xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+               xsi:schemaLocation="http://www.openarchives.org/OAI/2.0/oai_dc/ http://www.openarchives.org/OAI/2.0/oai_dc.xsd">
       <xsl:apply-templates mode="title"/>
       <xsl:apply-templates mode="identifier"/>
       <xsl:apply-templates mode="classification"/>
@@ -35,8 +35,8 @@
     <xsl:param name="type"/>
     <xsl:if test="$title != ''">
       <dc:title>
-	<xsl:value-of select="translate($title, '@', '')"/>
-	<xsl:if test="$subtitle != ''"><xsl:text> : </xsl:text><xsl:value-of select="$subtitle"/></xsl:if>
+        <xsl:value-of select="translate($title, '@', '')"/>
+        <xsl:if test="$subtitle != ''"><xsl:text> : </xsl:text><xsl:value-of select="$subtitle"/></xsl:if>
         <xsl:if test="$author-statement != ''"><xsl:text> / </xsl:text><xsl:value-of select="$author-statement"/></xsl:if>
       </dc:title>
     </xsl:if>
@@ -79,20 +79,20 @@
     <xsl:param name="publication-edition"/>
     <xsl:choose>
       <xsl:when test="$publication-edition = ''">
-	<xsl:if test="$publication-date != ''">
-	  <dc:date>
-	    <xsl:value-of select="$publication-date"/>
-	  </dc:date>
-	</xsl:if>
-	<xsl:if test="($publication-publisher != '') or ($publication-place != '')">
-	  <dc:publisher>
-	    <xsl:value-of select="$publication-place"/>
-	    <xsl:if test="($publication-publisher != '') and ($publication-place != '')">
-	      <xsl:text> : </xsl:text>
-	    </xsl:if>
-	    <xsl:value-of select="$publication-publisher"/>
-	  </dc:publisher>
-	</xsl:if>
+        <xsl:if test="$publication-date != ''">
+          <dc:date>
+            <xsl:value-of select="$publication-date"/>
+          </dc:date>
+        </xsl:if>
+        <xsl:if test="($publication-publisher != '') or ($publication-place != '')">
+          <dc:publisher>
+            <xsl:value-of select="$publication-place"/>
+            <xsl:if test="($publication-publisher != '') and ($publication-place != '')">
+              <xsl:text> : </xsl:text>
+            </xsl:if>
+            <xsl:value-of select="$publication-publisher"/>
+          </dc:publisher>
+        </xsl:if>
       </xsl:when>
     </xsl:choose>
   </xsl:template>
@@ -108,10 +108,10 @@
     <xsl:param name="person-name-display" select="'N.N'"/>
     <xsl:choose>
       <xsl:when test="$person-role = 'aut'">
-	<dc:creator><xsl:value-of select="$person-name-display"></xsl:value-of></dc:creator>
+        <dc:creator><xsl:value-of select="$person-name-display"></xsl:value-of></dc:creator>
       </xsl:when>
       <xsl:otherwise>
-	<dc:contributor><xsl:value-of select="$person-name-display"/></dc:contributor>
+        <dc:contributor><xsl:value-of select="$person-name-display"/></dc:contributor>
       </xsl:otherwise>
     </xsl:choose>
   </xsl:template>
@@ -128,7 +128,7 @@
     <xsl:param name="genre-authority"/>
     <xsl:if test="$genre != ''">
       <dc:subject>
-	<xsl:value-of select="$genre"/>
+        <xsl:value-of select="$genre"/>
       </dc:subject>
     </xsl:if>
   </xsl:template>
@@ -136,8 +136,12 @@
   <xsl:template name="related">
     <xsl:param name="related-title"/>
     <xsl:param name="related-type"/>
+    <xsl:param name="related-record-identifier"/>
     <xsl:if test="$related-title != ''">
       <dc:relation><xsl:value-of select="$related-title"/></dc:relation>
+    </xsl:if>
+    <xsl:if test="$related-record-identifier">
+      <dc:relation><xsl:value-of select="$related-record-identifier"/></dc:relation>
     </xsl:if>
   </xsl:template>
 
