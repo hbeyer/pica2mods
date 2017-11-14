@@ -371,12 +371,17 @@
 
   <!-- Horizontale Verknüpfungen -->
   <xsl:template match="datafield[@tag = '039D']">
-    <mods:relatedItem>
-      <xsl:choose>
-        <xsl:when test="subfield[@code = 'c'] = ('Online-Ausg.', 'Druckausg.')">
-          <xsl:attribute name="type">otherFormat</xsl:attribute>
-        </xsl:when>
-      </xsl:choose>
+    <mods:relatedItem displayLabel="{normalize-space(concat(subfield[@code = 'c'], ' ', subfield[@code = 'n']))}">
+      <xsl:if test="subfield[@code = 'a']">
+        <mods:titleInfo>
+          <mods:title><xsl:value-of select="subfield[@code = 'a']"/></mods:title>
+        </mods:titleInfo>
+      </xsl:if>
+      <xsl:if test="subfield[@code = 't']">
+        <mods:titleInfo>
+          <mods:title><xsl:value-of select="subfield[@code = 't']"/></mods:title>
+        </mods:titleInfo>
+      </xsl:if>
       <mods:recordInfo>
         <mods:recordIdentifier>
           <xsl:value-of select="(subfield[@code = 'C'], subfield[@code = '6'])"/>
