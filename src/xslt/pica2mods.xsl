@@ -89,6 +89,8 @@
         </xsl:if>
       </xsl:if>
 
+      <xsl:apply-templates select="datafield[@tag = '039D']"/>
+
       <!-- Informationen über den Datensatz -->
       <mods:recordInfo>
         <mods:recordIdentifier source="DE-23">
@@ -365,6 +367,22 @@
   <!-- Bemerkung -->
   <xsl:template match="datafield[@tag='037A']">
     <mods:note><xsl:value-of select="subfield[@code='a']" separator="; "/></mods:note>
+  </xsl:template>
+
+  <!-- Horizontale Verknüpfungen -->
+  <xsl:template match="datafield[@tag = '039D']">
+    <mods:relatedItem>
+      <xsl:choose>
+        <xsl:when test="subfield[@code = 'c'] = ('Online-Ausg.', 'Druckausg.')">
+          <xsl:attribute name="type">otherFormat</xsl:attribute>
+        </xsl:when>
+      </xsl:choose>
+      <mods:recordInfo>
+        <mods:recordIdentifier>
+          <xsl:value-of select="(subfield[@code = 'C'], subfield[@code = '6'])"/>
+        </mods:recordIdentifier>
+      </mods:recordInfo>
+    </mods:relatedItem>
   </xsl:template>
 
   <xsl:function name="pica:type" as="xsd:string">
