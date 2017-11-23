@@ -10,7 +10,16 @@
        dem Match die benötigten Angaben selektieren und das Template für die Formatierung aufrufen.
   -->
   <xsl:template match="pica:datafield[@tag='003@']" mode="publication">
-    <xsl:variable name="publication-date" select="translate(../pica:datafield[@tag='011@']/pica:subfield[@code='a'], '[]', '')"/>
+    <xsl:variable name="publication-date">
+      <xsl:choose>
+        <xsl:when test="../pica:datafield[@tag='011@']/pica:subfield[@code='r']">
+          <xsl:value-of select="translate(../pica:datafield[@tag='011@']/pica:subfield[@code='r'], '[]', '')"/>
+        </xsl:when>
+        <xsl:otherwise>
+          <xsl:value-of select="translate(../pica:datafield[@tag='011@']/pica:subfield[@code='a'], '[]', '')"/>
+        </xsl:otherwise>
+      </xsl:choose>
+    </xsl:variable>
     <xsl:variable name="publication-publisher" select="translate(../pica:datafield[@tag='033A']/pica:subfield[@code='n'], '[]', '')"/>
     <xsl:variable name="publication-place" select="translate(../pica:datafield[@tag='033A']/pica:subfield[@code='p'], '[]', '')"/>
     <xsl:if test="concat($publication-date, $publication-publisher, $publication-place) != ''">
