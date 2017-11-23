@@ -58,7 +58,7 @@
           </xsl:if>
           <xsl:if test="datafield[@tag = '011@']/subfield[@code = 'a']">
             <mods:dateIssued keyDate="yes" encoding="iso8601">
-              <xsl:value-of select="datafield[@tag = '011@']/subfield[@code = 'a'][1]"/>
+              <xsl:value-of select="(datafield[@tag = '011@']/subfield[@code = 'r'], datafield[@tag = '011@']/subfield[@code = 'a'])[1]"/>
             </mods:dateIssued>
           </xsl:if>
         </mods:originInfo>

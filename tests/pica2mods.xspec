@@ -110,4 +110,24 @@
     </expect>
   </scenario>
 
+  <scenario label="When processing a reproduction">
+    <context>
+      <pica:record>
+        <pica:datafield tag="011@">
+          <pica:subfield code="a">2017</pica:subfield>
+          <pica:subfield code="n">[2017]</pica:subfield>
+          <pica:subfield code="r">1757</pica:subfield>
+        </pica:datafield>
+      </pica:record>
+    </context>
+    <expect label="use date of original as mods:dateIssued">
+      <mods:mods>
+        <mods:originInfo>
+          <mods:dateIssued keyDate="yes" encoding="iso8601">1757</mods:dateIssued>
+        </mods:originInfo>
+        <mods:recordInfo>...</mods:recordInfo>
+      </mods:mods>
+    </expect>
+  </scenario>
+
 </description>
