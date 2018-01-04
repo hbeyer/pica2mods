@@ -236,7 +236,7 @@
                           separator=", "/>
           </xsl:when>
           <xsl:when test="$field/subfield[@code = 'P']">
-            <xsl:value-of select="$field/subfield[@code = 'P']"/>
+            <xsl:value-of select="$field/subfield[@code = 'P'][1]"/>
           </xsl:when>
           <xsl:otherwise>N.N.</xsl:otherwise>
         </xsl:choose>
