@@ -37,7 +37,7 @@
   </xsl:template>
 
   <!-- Fingerprint -->
-  <xsl:template match="pica:datafield[@tag='007P']" mode="identifier">
+  <xsl:template match="pica:datafield[@tag='007P'][pica:subfield[@code = '0']]" mode="identifier">
     <xsl:call-template name="identifier">
       <xsl:with-param name="identifier" select="pica:subfield[@code='0']"/>
       <xsl:with-param name="identifier-type" select="'fingerprint'"/>

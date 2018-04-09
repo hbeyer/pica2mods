@@ -94,4 +94,19 @@
     </expect>
   </scenario>
 
+  <scenario label="When processing a record with ISBD fingerprint field w/o a fingerprint">
+    <context>
+      <pica:record>
+        <pica:datafield tag="007P">
+          <pica:subfield code="A">HAB Wolfenbüttel</pica:subfield>
+        </pica:datafield>
+      </pica:record>
+    </context>
+    <expect label="do not create a mods:identifier[@type = 'fingerprint']">
+      <mods:mods>
+        <mods:recordInfo>...</mods:recordInfo>
+      </mods:mods>
+    </expect>
+  </scenario>
+
 </description>
