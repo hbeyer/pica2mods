@@ -34,13 +34,14 @@
             <xsl:value-of select="concat(', ', pica:subfield[@code = 'h'][1])"/>
           </xsl:if>
         </xsl:when>
-        <xsl:otherwise>
-          <xsl:value-of select="pica:subfield[@code = 'a']"/>
-        </xsl:otherwise>
+        <xsl:when test="pica:subfield[@code = '8']">
+          <xsl:value-of select="pica:subfield[@code = '8']"/>
+        </xsl:when>
+        <xsl:otherwise/>
       </xsl:choose>
     </xsl:variable>
 
-    <xsl:if test="$subject-label">
+    <xsl:if test="normalize-space($subject-label) != ''">
 
       <xsl:call-template name="subject">
         <xsl:with-param name="subject-value-uri">

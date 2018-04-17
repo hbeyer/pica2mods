@@ -45,17 +45,21 @@
         </mods:mods>
       </expect>
     </scenario>
-    <scenario label="with unavailable text content">
+    <scenario label="with expanded description">
       <context>
         <pica:record>
           <pica:datafield tag="044K">
+            <pica:subfield code="M">Tuv</pica:subfield>
             <pica:subfield code="9">134535960</pica:subfield>
-            <pica:subfield code="0">gnd/11859169X</pica:subfield>
+            <pica:subfield code="8">Description</pica:subfield>
           </pica:datafield>
         </pica:record>
       </context>
-      <expect label="do not create a mods:subject">
+      <expect label="create a mods:subject">
         <mods:mods>
+          <mods:subject authority="gnd">
+            <mods:topic>Description</mods:topic>
+          </mods:subject>
           <mods:recordInfo>...</mods:recordInfo>
         </mods:mods>
       </expect>

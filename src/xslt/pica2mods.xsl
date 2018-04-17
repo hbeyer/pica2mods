@@ -34,7 +34,7 @@
       <xsl:apply-templates mode="person"/>
       <xsl:apply-templates mode="misc"/>
 
-      <xsl:if test="pica:datafield[@tag='044K' and starts-with(pica:subfield[@code='M'], 'T')]">
+      <xsl:if test="pica:datafield[@tag='044K' and starts-with(pica:subfield[@code='M'], 'Tp')] or pica:datafield[@tag='044K' and pica:subfield[@code = '8']]">
         <mods:subject authority="gnd">
           <xsl:apply-templates mode="subject-gnd"/>
         </mods:subject>
