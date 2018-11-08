@@ -15,7 +15,7 @@
     </context>
     <expect label="create a mods:name with a 'corporate' @type">
       <mods:mods>
-        <mods:name type="corporate">...</mods:name>
+        <mods:name valueURI="http://d-nb.info/gnd/1070491144" type="corporate">...</mods:name>
         <mods:recordInfo>...</mods:recordInfo>
       </mods:mods>
     </expect>
