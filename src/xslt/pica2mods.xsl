@@ -53,6 +53,9 @@
           <xsl:when test="pica:subfield[@code = 'a']">
             <xsl:value-of select="pica:subfield[@code = 'a']"/>
           </xsl:when>
+          <xsl:when test="pica:subfield[@code = 'P']">
+            <xsl:value-of select="pica:subfield[@code = 'P']"/>
+          </xsl:when>
         </xsl:choose>
       </mods:topic>
     </mods:subject>
@@ -307,7 +310,7 @@
         </xsl:if>
       </mods:relatedItem>
     </xsl:if>
-    
+
   </xsl:template>
 
   <xsl:template name="make-titleInfo">
