@@ -43,22 +43,24 @@
 
   <!-- RSWK Schlagwörter -->
   <xsl:template match="pica:datafield[@tag = '044K']">
-    <mods:subject authority="gnd">
-      <mods:topic>
-        <xsl:call-template name="add-proxy-valueURI"/>
-        <xsl:choose>
-          <xsl:when test="pica:subfield[@code = '8']">
-            <xsl:value-of select="pica:subfield[@code = '8']"/>
-          </xsl:when>
-          <xsl:when test="pica:subfield[@code = 'a']">
-            <xsl:value-of select="pica:subfield[@code = 'a']"/>
-          </xsl:when>
-          <xsl:when test="pica:subfield[@code = 'P']">
-            <xsl:value-of select="pica:subfield[@code = 'P']"/>
-          </xsl:when>
-        </xsl:choose>
-      </mods:topic>
-    </mods:subject>
+    <xsl:if test="pica:subfield[@code = 'a' or @code = 'P']">
+      <mods:subject authority="gnd">
+        <mods:topic>
+          <xsl:call-template name="add-proxy-valueURI"/>
+          <xsl:choose>
+            <xsl:when test="pica:subfield[@code = '8']">
+              <xsl:value-of select="pica:subfield[@code = '8']"/>
+            </xsl:when>
+            <xsl:when test="pica:subfield[@code = 'a']">
+              <xsl:value-of select="pica:subfield[@code = 'a']"/>
+            </xsl:when>
+            <xsl:when test="pica:subfield[@code = 'P']">
+              <xsl:value-of select="pica:subfield[@code = 'P']"/>
+            </xsl:when>
+          </xsl:choose>
+        </mods:topic>
+      </mods:subject>
+    </xsl:if>
   </xsl:template>
 
   <!-- Basisklassifikation -->
