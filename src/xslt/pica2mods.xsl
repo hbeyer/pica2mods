@@ -206,14 +206,14 @@
       <xsl:if test="$field/subfield[@code = '0'][starts-with(., 'gnd/')]">
         <xsl:attribute name="valueURI" select="concat('http://d-nb.info/', $field/subfield[@code = '0'][starts-with(., 'gnd/')][1])"/>
       </xsl:if>
-      <xsl:if test="$field/subfield[@code = 'A']">
+      <xsl:if test="$field/subfield[@code = ('a', 'A')]">
         <mods:namePart type="family">
-          <xsl:value-of select="$field/subfield[@code = 'A'][1]"/>
+          <xsl:value-of select="$field/subfield[@code = ('a', 'A')][1]"/>
         </mods:namePart>
       </xsl:if>
-      <xsl:if test="$field/subfield[@code = 'D']">
+      <xsl:if test="$field/subfield[@code = ('d', 'D')]">
         <mods:namePart type="given">
-          <xsl:value-of select="$field/subfield[@code = 'D'][1]"/>
+          <xsl:value-of select="$field/subfield[@code = ('d', 'D')][1]"/>
         </mods:namePart>
       </xsl:if>
       <xsl:if test="$field/subfield[@code = 'h']">
@@ -231,8 +231,8 @@
           <xsl:when test="$field/subfield[@code = '8']">
             <xsl:value-of select="$field/subfield[@code = '8'][1]"/>
           </xsl:when>
-          <xsl:when test="$field/subfield[@code = 'A' or @code = 'D']">
-            <xsl:value-of select="($field/subfield[@code = 'A'][1], $field/subfield[@code = 'D'][1])"
+          <xsl:when test="$field/subfield[@code = ('a', 'A') or @code = ('d', 'D')]">
+            <xsl:value-of select="($field/subfield[@code = ('a', 'A')][1], $field/subfield[@code = ('d', 'D')][1])"
                           separator=", "/>
           </xsl:when>
           <xsl:when test="$field/subfield[@code = 'P']">
